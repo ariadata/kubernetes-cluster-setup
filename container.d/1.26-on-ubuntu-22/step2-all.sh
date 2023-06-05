@@ -36,3 +36,9 @@ echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | tee /etc/apt/sourc
 
 apt update
 
+read -e -p $'Do you want to \e[31mreboot now\033[0m ? : ' -i "y" if_reboot_at_end
+if [[ $if_reboot_at_end =~ ^([Yy])$ ]]
+then
+	reboot
+	exit
+fi

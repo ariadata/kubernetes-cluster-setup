@@ -30,6 +30,7 @@ hostnamectl set-hostname kworker2
 ```bash
 printf "\n192.168.2.160 k8s-control\n192.168.2.161 kworker1\n192.168.2.162 kworker2\n" >> /etc/hosts
 
+# on questions, just press enter
 bash <(curl -sSL https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/step2-all.sh)
 
 reboot
@@ -43,6 +44,9 @@ apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00 && apt-
 ## Install Control-Plane (as root) in `Control Node` :
 ```bash
 kubeadm init --pod-network-cidr 10.10.0.0/16 --kubernetes-version 1.26.1 --node-name k8s-control
+
+##### Other stuffs here #####
+export KUBECONFIG=/etc/kubernetes/admin.conf
 
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
 
