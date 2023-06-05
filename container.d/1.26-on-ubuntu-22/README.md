@@ -70,3 +70,9 @@ kubeadm token create --print-join-command
 ```bash
 kubectl get nodes -o wide
 ```
+
+# Used Links:
+- https://youtu.be/7k9Rdlx30OY
+- https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt
+- https://www.youtube.com/watch?v=Ro2qeYeisZQ
+- https://www.youtube.com/watch?v=8q9uPjDF59Q
