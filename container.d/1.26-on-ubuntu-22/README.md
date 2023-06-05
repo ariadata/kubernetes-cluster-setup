@@ -1,0 +1,68 @@
+# Setup Kubernetes 1.26 cluster on ubuntu-22.04 with containerd
+
+> Kubernetes 1.26
+
+> Containerd 1.6.16
+
+> Calico 3.25 CNI
+
+>Ubuntu 22.04
+
+## Setup Hostnames (as root) in `Each Nodes` :
+```bash
+#In this example we have 3 nodes:
+#192.168.2.160 k8s-control
+#192.168.2.161 kworker1
+#192.168.2.162 kworker2
+
+#Control Node:
+hostnamectl set-hostname k8s-control
+
+#Worker Node 1:
+hostnamectl set-hostname kworker1
+
+#Worker Node 2:
+hostnamectl set-hostname kworker2
+
+```
+
+## Step-2 (as root) in `All Nodes` :
+```bash
+printf "\n192.168.2.160 k8s-control\n192.168.2.161 kworker1\n192.168.2.162 kworker2\n" >> /etc/hosts
+
+bash <(curl -sSL https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/step2-all.sh)
+
+reboot
+```
+
+## Install kubernetes (as root) in `All Nodes` :
+```bash
+apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00 && apt-mark hold kubelet kubeadm kubectl
+```
+
+## Install Control-Plane (as root) in `Control Node` :
+```bash
+kubeadm init --pod-network-cidr 10.10.0.0/16 --kubernetes-version 1.26.1 --node-name k8s-control
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
+
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
+
+#edit the CIDR for pods if its custom
+sed -i "s|192.168.0.0/16|10.10.0.0/16|g" ~/custom-resources.yaml
+
+kubectl apply -f ~/custom-resources.yaml
+
+# get worker node commands to run to join additional nodes into cluster
+kubeadm token create --print-join-command
+```
+
+## Connect Worker Nodes (as root) in `Worker Nodes` :
+```bash
+#Run the command from the token create output above
+```
+
+## Check Cluster Status (as root) in `Control Node` :
+```bash
+kubectl get nodes -o wide
+```
