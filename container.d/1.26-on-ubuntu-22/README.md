@@ -32,8 +32,6 @@ printf "\n192.168.2.160 k8s-control\n192.168.2.161 kworker1\n192.168.2.162 kwork
 
 # on questions, just press enter
 bash <(curl -sSL https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/step2-all.sh)
-
-reboot
 ```
 
 ## Install Control-Plane (as root) in `Control Node` :
