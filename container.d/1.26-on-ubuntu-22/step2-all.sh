@@ -38,8 +38,6 @@ echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | tee /etc/apt/sourc
 
 apt upgrade -y && apt autoremove -y
 
-apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00 && apt-mark hold kubelet kubeadm kubectl
-
 read -e -p $'Do you want to \e[31mreboot now\033[0m ? : ' -i "y" if_reboot_at_end
 if [[ $if_reboot_at_end =~ ^([Yy])$ ]]
 then
