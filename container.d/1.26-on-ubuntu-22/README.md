@@ -42,7 +42,7 @@ kubeadm init --pod-network-cidr 10.10.0.0/16 --kubernetes-version 1.26.1 --node-
 ##### Other stuffs here #####
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
-kubectl create -f https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/calico-v3.25.0-tigera-operator.yaml -O ~/tigera-operator.yaml
+kubectl create -f https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/calico-v3.25.0-tigera-operator.yaml
 
 wget https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/calico-v3.25.0-custom-resources.yaml -O ~/custom-resources.yaml
 
