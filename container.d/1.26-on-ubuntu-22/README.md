@@ -36,11 +36,6 @@ bash <(curl -sSL https://github.com/ariadata/kubernetes-cluster-setup/raw/main/c
 reboot
 ```
 
-## Install kubernetes (as root) in `All Nodes` :
-```bash
-apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00 && apt-mark hold kubelet kubeadm kubectl
-```
-
 ## Install Control-Plane (as root) in `Control Node` :
 ```bash
 kubeadm init --pod-network-cidr 10.10.0.0/16 --kubernetes-version 1.26.1 --node-name k8s-control
