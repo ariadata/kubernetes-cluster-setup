@@ -34,7 +34,7 @@ curl -fsSLo - https://dl.k8s.io/apt/doc/apt-key.gpg | gpg --dearmor -o /etc/apt/
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
 echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | tee /etc/apt/sources.list.d/kubernetes.list
 
-apt update
+apt upgrade -y && apt autoremove -y
 
 read -e -p $'Do you want to \e[31mreboot now\033[0m ? : ' -i "y" if_reboot_at_end
 if [[ $if_reboot_at_end =~ ^([Yy])$ ]]
