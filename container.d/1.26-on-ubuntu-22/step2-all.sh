@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DEBIAN_FRONTEND=noninteractive
 apt update && apt upgrade -y && apt autoremove -y
 apt -y install wget curl nano lsb-release gnupg-agent apt-transport-https ca-certificates software-properties-common
 printf "overlay\nbr_netfilter\n" >> /etc/modules-load.d/containerd.conf
