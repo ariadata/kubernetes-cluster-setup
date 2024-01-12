@@ -30,6 +30,9 @@ hostnamectl set-hostname kworker2
 ```bash
 printf "\n192.168.2.160 k8s-control\n192.168.2.161 kworker1\n192.168.2.162 kworker2\n" >> /etc/hosts
 
+systemctl disable systemd-resolved.service
+rm -rf /etc/resolv.conf && echo -e "nameserver 1.1.1.1\n8.8.4.4\n" | tee /etc/resolv.conf
+
 # on questions, just press enter
 bash <(curl -sSL https://github.com/ariadata/kubernetes-cluster-setup/raw/main/container.d/1.26-on-ubuntu-22/step2-all.sh)
 
