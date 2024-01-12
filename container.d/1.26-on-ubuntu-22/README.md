@@ -30,7 +30,8 @@ hostnamectl set-hostname kworker2
 ```bash
 printf "\n192.168.2.160 k8s-control\n192.168.2.161 kworker1\n192.168.2.162 kworker2\n" >> /etc/hosts
 
-systemctl disable systemd-resolved.service
+systemctl disable --now systemd-resolved.service
+
 rm -rf /etc/resolv.conf && echo -e "nameserver 1.1.1.1\n8.8.4.4\n" | tee /etc/resolv.conf
 
 # on questions, just press enter
